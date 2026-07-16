@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GaLM 2026: The 2nd International Workshop on Graph-Augmented LLMs (GaLM): Bridging Language and Structured Knowledge @ CIKM 2026</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            background-color: #f3f4f6;
+            color: #1a1a1a;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(rgba(41, 98, 255, 0.85), rgba(41, 98, 255, 0.85)), url('https://images.unsplash.com/photo-1555448248-2571daf6344b?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            padding: 2.5rem 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-content {
+            flex-grow: 1;
+        }
+
+        .header-titles h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .header-titles p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.25rem;
+            margin: 0.75rem 0 0.5rem 0;
+            font-weight: 500;
+        }
+
+        .header-titles p.location {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            margin-top: 0;
+        }
+
+        /* Navigation */
+        .nav-menu {
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s, border 0.2s;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid transparent;
+        }
+        
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid white;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Main content */
+        main {
+            padding: 2rem 0;
+            margin-top: 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Cards and Grids (used for Speakers & Organizers) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.25rem auto;
+            display: block;
+            border: 4px solid #f3f4f6;
+        }
+
+        .card-name {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+            text-align: center;
+        }
+
+        .card-affiliation {
+            color: #6b7280;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        /* Keynote specific styles */
+        .keynote-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .keynote-card {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .keynote-card .card-photo {
+                margin: 0;
+                width: 200px;
+                height: 200px;
+                flex-shrink: 0;
+            }
+            .keynote-info {
+                text-align: left;
+            }
+            .keynote-info .card-name, .keynote-info .card-affiliation {
+                text-align: left;
+            }
+        }
+
+        .keynote-abstract {
+            margin-top: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        /* Special Sections */
+        .highlight-section {
+            background-color: #f0fdf4;
+            padding: 1.5rem 2rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #22c55e;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .challenge-section {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .content-list {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .content-list ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Table */
+        .dates-table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+
+        .dates-table th, .dates-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .dates-table td:first-child {
+            font-weight: 600;
+            color: #374151;
+            width: 60%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .hamburger {
+                display: block;
+                position: absolute;
+                top: 2rem;
+                right: 1.5rem;
+            }
+
+            .nav-menu ul {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav-menu.active ul {
+                display: flex;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 0.75rem 1rem;
+            }
+
+            header .container {
+                flex-direction: column;
+                padding-top: 1rem;
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-titles">
+                    <h1>The 2nd International Workshop on Graph-Augmented LLMs (GaLM): Bridging Language and Structured Knowledge</h1>
+                    <p>35th International ACM Conference on Knowledge and Information Management (CIKM 2026)</p>
+                    <p class="location">November 8, 2026 • Rome, ITALY</p>
+                </div>
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#dates">Important Dates</a></li>
+                        <li><a href="#cfp">Call for Papers</a></li>
+                        <li><a href="#keynote">Keynote</a></li>
+                        <li><a href="#organizers">Organizers</a></li>
+                    </ul>
+                    <button class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="about">
+            <h2>About the Workshop</h2>
+            <p>
+                Welcome to the 2nd Graph-Augmented LLMs (GaLM): Bridging Language and Structured Knowledge Workshop, taking place on November 8, 2026 at CIKM! This event brings together advanced graph machine learning, LLMs research and practical industrial applications. 
+            </p>
+            <br>
+            <p>
+                Our GaLM workshop explores the synergistic convergence of LLMs and graph-based methodologies and its applications with its transformative potential. This integration facilitates advancements in areas such as enhanced reasoning, improved contextual understanding, and robust generalization. We aim to foster discussions on leveraging Graph Neural Networks (GNNs) and graph representation learning to augment LLMs, as well as investigating the application of federated learning and unlearning techniques to address privacy and ethical concerns in this rapidly evolving field. 
+            </p>
+            <br>
+            <p>
+                This workshop aims to foster discussions on how graph structures can empower LLMs to achieve improved reasoning, knowledge integration, and data privacy in diverse applications, including but not limited to biomedical, environmental and social-economic systems, with highly structured knowledge. 
+            </p>
+        </section>
+
+        <section id="dates" class="highlight-section">
+            <h2 style="border-bottom: none; margin-bottom: 0; color: #166534;">Important Dates</h2>
+            <table class="dates-table">
+                <tbody>
+                    <tr>
+                        <td>Paper Submission Deadline</td>
+                        <td>August 24, 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Paper Acceptance Notification (highly desirable)</td>
+                        <td>September 23, 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Workshop Date</td>
+                        <td>November 8, 2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="cfp" class="challenge-section">
+            <h2>Call for Papers</h2>
+            <p>The aim of this workshop is to foster discussion around the emerging role of LLMs utilising graph data and computing techniques to enhance LLM capabilities and conversely, vice versa. We will invite original and unpublished research contributions to GaLM in relevant subjects, including, but not limited to:</p>
+            
+            <ul class="content-list">
+                <li>Data cleaning, integration, and augmentation with graph-based LLMs</li>
+                <li>Graph-enhanced LLM architectures</li>
+                <li>LLMs for graph understanding and generation</li>
+                <li>LLM-driven graph processing</li>
+                <li>Multimodal graph-LLM integration</li>
+                <li>Explainability, provenance, security, privacy, benchmarking for graph-based LLMs</li>
+                <li>Real-world applications of graph-enhanced LLMs in domains such as healthcare, finance, and social media.</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Submission Requirements</h3>
+            <ul class="content-list">
+                <li><strong>Content:</strong> Authors are invited to submit full-length research papers, including those that have already been published elsewhere. Submissions should be relevant to the workshop theme and meet the standards of top-tier international research conferences.</li>
+                <li><strong>Format:</strong> Manuscripts must be submitted in PDF format. Papers should follow the official ACM sigconf two-column template:
+                    <ul>
+                        <li><strong>Full papers:</strong> maximum 8 pages, plus unlimited pages for references, appendix and GenAI usage disclosure, presenting mature research results.</li>
+                        <li><strong>Short papers:</strong> maximum 4 pages, plus unlimited pages for references, appendix and GenAI usage disclosure, presenting ongoing work, demos, position, or opinion papers.</li>
+                    </ul>
+                </li>
+                <li><strong>Anonymity:</strong> Submitted papers will undergo <strong>double-blind review</strong>. All submissions must be properly anonymized. Non-anonymized papers will be desk-rejected without review.</li>
+                <li><strong>AI Tool Usage:</strong> LLM-generated text is <strong>prohibited</strong> unless part of the experimental analysis. AI tools may only be used for light editing (e.g., grammar checks).</li>
+                <li><strong>Proceedings:</strong> Accepted papers can be recommended to (Optional, based on the authors’ choice) <strong>CEUR Workshop Proceedings</strong>.</li>
+            </ul>
+        </section>
+
+        <section id="keynote">
+            <h2>Keynote Speaker</h2>
+            <!--<div class="card keynote-card">
+                <img src="https://via.placeholder.com/300?text=Pan+Li" alt="Pan Li" class="card-photo">
+                <div class="keynote-info">
+                    <h3 class="card-name">Pan Li</h3>
+                    <p class="card-affiliation">Assistant Professor, School of Electrical and Computer Engineering, Georgia Tech</p>
+                    
+                    <div class="keynote-abstract">
+                        <p><strong>Talk: Beyond the Sequence: Challenges and Opportunities in Integrating Graphs and LLMs</strong></p>
+                        <br>
+                        <p><strong>Abstract:</strong> Large Language Models (LLMs) have demonstrated remarkable capabilities in processing and generating sequential text. However, real-world information such as scientific knowledge and enterprise data is rarely a flat sequence; it is a graph of complex relationships. This fundamental mismatch limits an LLM's ability to perform deep relational reasoning, ground its outputs in factual knowledge, and operate safely on sensitive, interconnected data.</p>
+                    </div>
+                </div>
+            </div>-->TBD
+        </section>
+
+        <section id="organizers">
+            <h2>Organizers</h2>
+            <div class="cards-grid">
+                
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Amit+Kumar" alt="Amit Kumar Jaiswal" class="card-photo">
+                    <h3 class="card-name">Amit Kumar Jaiswal</h3>
+                    <p class="card-affiliation">IIT (BHU) Varanasi, India</p>
+                </div>
+                
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Benyou+Wang" alt="Benyou Wang" class="card-photo">
+                    <h3 class="card-name">Benyou Wang</h3>
+                    <p class="card-affiliation">CUHK Shenzen, China</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Ruchir+Gupta" alt="Ruchir Gupta" class="card-photo">
+                    <h3 class="card-name">Ruchir Gupta</h3>
+                    <p class="card-affiliation">IIT (BHU) Varanasi, India</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Jiale+Han" alt="Jiale Han" class="card-photo">
+                    <h3 class="card-name">Jiale Han</h3>
+                    <p class="card-affiliation">Shenzhen Loop Area Institute, China</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Prayag+Tiwari" alt="Prayag Tiwari" class="card-photo">
+                    <h3 class="card-name">Prayag Tiwari</h3>
+                    <p class="card-affiliation">Halmstad University, Sweden</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Shandar+Ahmad" alt="Shandar Ahmad" class="card-photo">
+                    <h3 class="card-name">Shandar Ahmad</h3>
+                    <p class="card-affiliation">Jawaharlal Nehru University, India</p>
+                </div>
+
+                <div class="card">
+                    <img src="https://via.placeholder.com/200?text=Amit+Agarwal" alt="Amit Agarwal" class="card-photo">
+                    <h3 class="card-name">Amit Agarwal</h3>
+                    <p class="card-affiliation">Capital One, India</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>2nd International Workshop on Graph-Augmented LLMs (GaLM)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #9ca3af;">
+                For any further questions, please contact 
+                <a href="mailto:amit.chr@iitbhu.ac.in">Amit Kumar Jaiswal</a>.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Navbar Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a navigation link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
