@@ -289,6 +289,41 @@
             width: 60%;
         }
 
+        .schedule-table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 0.9rem 1.25rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .schedule-table th {
+            background-color: #f8fafc;
+            color: #374151;
+        }
+
+        .schedule-table td:first-child {
+            color: #374151;
+            font-weight: 600;
+            white-space: nowrap;
+            width: 1%;
+        }
+
+        .schedule-details {
+            display: block;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
         /* Footer */
         footer {
             background-color: #1f2937;
@@ -355,6 +390,7 @@
                     <ul>
                         <li><a href="#about">About</a></li>
                         <li><a href="#dates">Important Dates</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
                         <li><a href="#cfp">Call for Papers</a></li>
                         <li><a href="#accepted-papers">Accepted Papers</a></li>
                         <li><a href="#keynote">Keynote</a></li>
@@ -403,6 +439,65 @@
                     <tr>
                         <td>Workshop Date</td>
                         <td>November 8, 2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="schedule">
+            <h2>Workshop Schedule</h2>
+            <p>November 8, 2026 • 14:00–18:00 CET</p>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Time (CET)</th>
+                        <th scope="col">Program</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>14:00–14:10</td>
+                        <td><strong>Opening Remarks</strong><span class="schedule-details">Session Chair: Amirhossein Ghaffari</span></td>
+                    </tr>
+                    <tr>
+                        <td>14:10–15:10</td>
+                        <td><strong>Keynote: What Does Graph Grounding Really Give Us? Lessons from Recommendation</strong><span class="schedule-details">Ludovico Boratto · 45-minute talk + 15-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>15:10–15:30</td>
+                        <td>QFuse: Preserving Precise Queryability in Knowledge Graphs over Structured and Unstructured Data<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>15:30–15:50</td>
+                        <td>On the LLM Verification for Argument Graph Generation<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>15:50–16:10</td>
+                        <td>Embedding-Based Multi-View Representation Learning and Seed-Driven Retrieval for Open-Ended Multi-Task Ranking<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>16:10–16:30</td>
+                        <td>Cold-Start Link Prediction Needs a Ranking Readout<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>16:30–16:50</td>
+                        <td><strong>Break</strong></td>
+                    </tr>
+                    <tr>
+                        <td>16:50–17:10</td>
+                        <td>Stratify Before Comparison: Encoding Diversity Beats Sampling Diversity as a Reliability Signal for the Weaker of Two LLM Graph Reasoners<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>17:10–17:30</td>
+                        <td>Detecting Differences Is Not Understanding Structure: Large Language Models Fail at Graph Isomorphism<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>17:30–17:50</td>
+                        <td>FedMamba-V2X: A Federated Mamba-LLM Ensemble for Vehicular Intrusion Detection<span class="schedule-details">15-minute talk + 5-minute Q&amp;A</span></td>
+                    </tr>
+                    <tr>
+                        <td>17:50–18:00</td>
+                        <td><strong>Closing Remarks</strong></td>
                     </tr>
                 </tbody>
             </table>
